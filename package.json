@@ -2,14 +2,22 @@
   "name": "api-todo",
   "version": "1.0.50",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "bun run --watch src/index.ts"
+    "dev": "bun run --watch src/index.ts",
+    "start": "bun run ./src/index.ts",
+    "db:generate": "prisma generate",
+    "db:push": "prisma db push",
+    "db:studio": "prisma studio",
+    "db:reset": "prisma migrate reset --force && prisma generate && prisma db push"
   },
   "dependencies": {
-    "elysia": "latest"
+    "@elysiajs/openapi": "^1.4.11",
+    "@prisma/client": "^6.16.3",
+    "elysia": "^1.4.9",
+    "prismabox": "^1.1.25"
   },
   "devDependencies": {
-    "bun-types": "latest"
-  },
-  "module": "src/index.js"
+    "@types/bun": "^1.2.23",
+    "prisma": "^6.16.3",
+    "typescript": "^5.9.3"
+  }
 }
