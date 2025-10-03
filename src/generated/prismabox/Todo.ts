@@ -1,25 +1,34 @@
 import { t } from "elysia";
 
+import { __transformDate__ } from "./__transformDate__";
+
+import { __nullable__ } from "./__nullable__";
+
 export const TodoPlain = t.Object(
   { id: t.String(), name: t.String(), done: t.Boolean() },
-  { additionalProperties: false }
+  { additionalProperties: false },
 );
 
 export const TodoRelations = t.Object({}, { additionalProperties: false });
 
 export const TodoPlainInputCreate = t.Object(
   { name: t.String(), done: t.Optional(t.Boolean()) },
-  { additionalProperties: false }
+  { additionalProperties: false },
 );
 
 export const TodoPlainInputUpdate = t.Object(
   { name: t.Optional(t.String()), done: t.Optional(t.Boolean()) },
-  { additionalProperties: false }
+  { additionalProperties: false },
 );
 
-export const TodoRelationsInputCreate = t.Object({}, { additionalProperties: false });
+export const TodoRelationsInputCreate = t.Object(
+  {},
+  { additionalProperties: false },
+);
 
-export const TodoRelationsInputUpdate = t.Partial(t.Object({}, { additionalProperties: false }));
+export const TodoRelationsInputUpdate = t.Partial(
+  t.Object({}, { additionalProperties: false }),
+);
 
 export const TodoWhere = t.Partial(
   t.Recursive(
@@ -33,33 +42,47 @@ export const TodoWhere = t.Partial(
           name: t.String(),
           done: t.Boolean(),
         },
-        { additionalProperties: false }
+        { additionalProperties: false },
       ),
-    { $id: "Todo" }
-  )
+    { $id: "Todo" },
+  ),
 );
 
 export const TodoWhereUnique = t.Recursive(
   (Self) =>
     t.Intersect(
       [
-        t.Partial(t.Object({ id: t.String() }, { additionalProperties: false }), { additionalProperties: false }),
+        t.Partial(
+          t.Object({ id: t.String() }, { additionalProperties: false }),
+          { additionalProperties: false },
+        ),
         t.Union([t.Object({ id: t.String() })], {
           additionalProperties: false,
         }),
         t.Partial(
           t.Object({
-            AND: t.Union([Self, t.Array(Self, { additionalProperties: false })]),
-            NOT: t.Union([Self, t.Array(Self, { additionalProperties: false })]),
+            AND: t.Union([
+              Self,
+              t.Array(Self, { additionalProperties: false }),
+            ]),
+            NOT: t.Union([
+              Self,
+              t.Array(Self, { additionalProperties: false }),
+            ]),
             OR: t.Array(Self, { additionalProperties: false }),
           }),
-          { additionalProperties: false }
+          { additionalProperties: false },
         ),
-        t.Partial(t.Object({ id: t.String(), name: t.String(), done: t.Boolean() }, { additionalProperties: false })),
+        t.Partial(
+          t.Object(
+            { id: t.String(), name: t.String(), done: t.Boolean() },
+            { additionalProperties: false },
+          ),
+        ),
       ],
-      { additionalProperties: false }
+      { additionalProperties: false },
     ),
-  { $id: "Todo" }
+  { $id: "Todo" },
 );
 
 export const TodoSelect = t.Partial(
@@ -70,11 +93,13 @@ export const TodoSelect = t.Partial(
       done: t.Boolean(),
       _count: t.Boolean(),
     },
-    { additionalProperties: false }
-  )
+    { additionalProperties: false },
+  ),
 );
 
-export const TodoInclude = t.Partial(t.Object({ _count: t.Boolean() }, { additionalProperties: false }));
+export const TodoInclude = t.Partial(
+  t.Object({ _count: t.Boolean() }, { additionalProperties: false }),
+);
 
 export const TodoOrderBy = t.Partial(
   t.Object(
@@ -89,18 +114,20 @@ export const TodoOrderBy = t.Partial(
         additionalProperties: false,
       }),
     },
-    { additionalProperties: false }
-  )
+    { additionalProperties: false },
+  ),
 );
 
 export const Todo = t.Composite([TodoPlain, TodoRelations], {
   additionalProperties: false,
 });
 
-export const TodoInputCreate = t.Composite([TodoPlainInputCreate, TodoRelationsInputCreate], {
-  additionalProperties: false,
-});
+export const TodoInputCreate = t.Composite(
+  [TodoPlainInputCreate, TodoRelationsInputCreate],
+  { additionalProperties: false },
+);
 
-export const TodoInputUpdate = t.Composite([TodoPlainInputUpdate, TodoRelationsInputUpdate], {
-  additionalProperties: false,
-});
+export const TodoInputUpdate = t.Composite(
+  [TodoPlainInputUpdate, TodoRelationsInputUpdate],
+  { additionalProperties: false },
+);

@@ -1,8 +1,10 @@
+import cors from "@elysiajs/cors";
 import { Elysia, status, t } from "elysia";
 import { TodoPlain, TodoPlainInputCreate, TodoPlainInputUpdate } from "./generated/prismabox/Todo";
 import { prisma } from "./prisma";
 
 const app = new Elysia()
+  .use(cors())
   .get(
     "/todo",
     async () => {
